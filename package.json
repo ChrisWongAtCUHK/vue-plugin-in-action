@@ -1,12 +1,24 @@
 {
   "name": "vue-plugin-in-action",
   "version": "0.1.0",
-  "private": true,
+  "main": "dist/vue-plugin-in-action.umd.js",
+  "module": "dist/vue-plugin-in-action.esm.js",
+  "unpkg": "dist/vue-plugin-in-action.min.js",
+  "browser": {
+    "./sfc": "src/vue-plugin-in-action.vue"
+  },
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lint:fix": "vue-cli-service lint --fix"
+    "lint:fix": "vue-cli-service lint --fix",
+    "build": "yarn run build:unpkg & yarn run build:es & yarn run build:umd",
+    "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd --file dist/vue-plugin-in-action.umd.js",
+    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es --file dist/vue-plugin-in-action.esm.js",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife --file dist/vue-plugin-in-action.min.js"
   },
   "lint-staged": {
     "src/**/*.{js,json,vue}": [
@@ -19,16 +31,13 @@
       "pre-commit": "lint-staged"
     }
   },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11"
-  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.2",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
@@ -37,6 +46,14 @@
     "eslint-plugin-vue": "^6.2.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.7",
+    "minimist": "^1.2.5",
+    "rollup": "^2.12.1",
+    "rollup-plugin-buble": "^0.19.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-uglify-es": "^0.0.1",
+    "rollup-plugin-vue": "^4.7.2",
+    "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
