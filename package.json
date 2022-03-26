@@ -46,7 +46,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.7",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "rollup": "^2.12.1",
     "rollup-plugin-buble": "^0.19.8",
     "rollup-plugin-commonjs": "^10.1.0",
